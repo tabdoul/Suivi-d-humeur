@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 import { SelecteurHumeur } from "./src/components/SelecteurHumeur";
-import { NiveauHumeur } from "./src/types/typeHumer";
+import { NiveauHumeur } from "./src/types/typeHumeur";
 
 export default function App() {
   const [valeur, setValeur] = useState<NiveauHumeur | null>(null);
