@@ -6,11 +6,7 @@ import { EcranAujourdhui } from "../screens/EcranAujourdhui";
 import { EcranHistorique } from "../screens/EcranHistorique";
 import { couleurs } from "../theme/couleurs";
 
-/**
- * "Onglets" definit la liste des noms d'ecrans valides pour la navigation
- * par onglets, avec les parametres que chaque ecran peut recevoir (aucun
- * ici, d'ou "undefined").
- */
+
 export type ListeOnglets = {
   Aujourdhui: undefined;
   Historique: undefined;
@@ -18,12 +14,6 @@ export type ListeOnglets = {
 
 const Tab = createBottomTabNavigator<ListeOnglets>();
 
-/**
- * Navigation = le composant racine de la navigation. Definit les deux
- * onglets (Aujourdhui / Historique), avec leurs icones et couleurs.
- * A utiliser dans App.tsx, a l'interieur de ProviderHumeurs (pour que les
- * deux ecrans aient acces aux memes donnees partagees).
- */
 export function Navigation() {
   return (
     <NavigationContainer>
