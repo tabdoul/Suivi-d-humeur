@@ -1,21 +1,22 @@
 import React, { ReactNode } from "react";
 import { ActivityIndicator, Pressable, StyleSheet, Text, View } from "react-native";
 import { StatutReseau } from "../types/typeHumeur";
+import { couleurs } from "../theme/couleurs";
 
 interface EtatReseauProps {
   statut: StatutReseau;
   messageErreur: string | null;
   onReessayer: () => void;
-  aDesDonnees: boolean; // true si on a deja des humeurs a afficher, meme en cas d'erreur
-  children: ReactNode; // le contenu a afficher si tout va bien (la liste des humeurs)
+  aDesDonnees: boolean;
+  children: ReactNode;
 }
 
-        // EtatReseau 
+// EtatReseau
 export function EtatReseau({ statut, messageErreur, onReessayer, aDesDonnees, children }: EtatReseauProps) {
   if (statut === "chargement" && !aDesDonnees) {
     return (
       <View style={styles.centre}>
-        <ActivityIndicator size="large" color="#2E6BE6" />
+        <ActivityIndicator size="large" color={couleurs.principal} />
         <Text style={styles.texteAttenue}>Chargement de l'historique...</Text>
       </View>
     );
@@ -58,36 +59,36 @@ const styles = StyleSheet.create({
   },
   texteAttenue: {
     marginTop: 12,
-    color: "#6B7280",
+    color: couleurs.texteAttenue,
   },
   texteErreur: {
-    color: "#D64545",
+    color: couleurs.erreur,
     textAlign: "center",
     marginBottom: 16,
   },
   boutonReessayer: {
-    backgroundColor: "#2E6BE6",
+    backgroundColor: couleurs.principal,
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 8,
   },
   texteBoutonReessayer: {
-    color: "#FFFFFF",
+    color: couleurs.texteSurPrincipal,
     fontWeight: "600",
   },
   bandeauAvertissement: {
-    backgroundColor: "#FDEDEC",
+    backgroundColor: couleurs.erreurFond,
     padding: 10,
     marginHorizontal: 16,
     marginTop: 8,
     borderRadius: 8,
   },
   texteAvertissement: {
-    color: "#D64545",
+    color: couleurs.erreur,
     fontSize: 12,
   },
   lienReessayer: {
-    color: "#D64545",
+    color: couleurs.erreur,
     fontWeight: "700",
     fontSize: 12,
     marginTop: 4,
