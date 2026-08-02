@@ -20,9 +20,9 @@ export async function recupererHumeurs(): Promise<EntreeHumeur[]> {
 }
 
 
-export async function envoyerHumeur(humeur: NiveauHumeur): Promise<EntreeHumeur> {
+export async function envoyerHumeur(humeur: NiveauHumeur, raison?: string): Promise<EntreeHumeur> {
   try {
-    const reponse = await client.post<EntreeHumeur>("/api/humeurs", { humeur });
+    const reponse = await client.post<EntreeHumeur>("/api/humeurs", { humeur, raison });
     return reponse.data;
   } catch (erreur) {
     throw new Error(transformerEnMessageLisible(erreur, "Impossible d'enregistrer votre humeur."));
