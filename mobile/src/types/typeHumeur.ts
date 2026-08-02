@@ -3,6 +3,7 @@
 export interface EntreeHumeur {
   id: string;          // identifiant unique de cette humeur (donné par le serveur)
   humeur: NiveauHumeur; // la note choisie, un nombre entre 1 et 5
+  raison?: string;       // texte libre et facultatif expliquant cette humeur
   date: string;         // le jour où l'humeur a été notée, format "2026-08-01"
   creeLe: string;       // la date ET l'heure exactes de l'enregistrement (format ISO)
 }
