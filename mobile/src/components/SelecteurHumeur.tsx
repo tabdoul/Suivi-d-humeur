@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { LIBELLES_HUMEUR, NiveauHumeur } from "../types/typeHumeur";
 import { COULEURS_HUMEUR, ICONES_HUMEUR } from "../theme/styleHumeur";
-
+import { couleurs } from "../theme/couleurs";
 
 interface SelecteurHumeurProps {
   value: NiveauHumeur | null;
@@ -11,12 +11,11 @@ interface SelecteurHumeurProps {
   disabled?: boolean;
 }
 
-// La liste des 5 niveaux possibles, dans l'ordre d'affichage.
 const NIVEAUX: NiveauHumeur[] = [1, 2, 3, 4, 5];
 
 export function SelecteurHumeur({ value, onChange, disabled }: SelecteurHumeurProps) {
   return (
-    <View style={styles.ligne}>
+    <View style={styles.colonne}>
       {NIVEAUX.map((niveau) => {
         const selected = value === niveau;
         const couleur = COULEURS_HUMEUR[niveau];
@@ -30,20 +29,19 @@ export function SelecteurHumeur({ value, onChange, disabled }: SelecteurHumeurPr
             disabled={disabled}
             onPress={() => onChange(niveau)}
             style={({ pressed }) => [
-              styles.bouton,
-              selected && { borderColor: couleur, backgroundColor: `${couleur}1A` }, // 1A = 10% d'opacite en hexa
-              pressed && styles.boutonPresse,
-              disabled && styles.boutonDesactive,
+              styles.ligne,
+              selected && { borderColor: couleur, backgroundColor: `${couleur}0D` },
+              pressed && styles.lignePressee,
+              disabled && styles.ligneDesactivee,
             ]}
           >
-            <Ionicons
-              name={ICONES_HUMEUR[niveau] as any}
-              size={26}
-              color={selected ? couleur : "#9CA3AF"}
-            />
+            <View style={[styles.cercleIcone, { backgroundColor: `${couleur}26` }]}>
+              <Ionicons name={ICONES_HUMEUR[niveau] as any} size={19} color={couleur} />
+            </View>
             <Text style={[styles.libelle, selected && { color: couleur, fontWeight: "700" }]}>
               {LIBELLES_HUMEUR[niveau]}
             </Text>
+            {selected && <Ionicons name="checkmark" size={18} color={couleur} style={styles.coche} />}
           </Pressable>
         );
       })}
@@ -52,30 +50,39 @@ export function SelecteurHumeur({ value, onChange, disabled }: SelecteurHumeurPr
 }
 
 const styles = StyleSheet.create({
+  colonne: {
+    gap: 8,
+  },
   ligne: {
     flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  bouton: {
-    flex: 1,
-    marginHorizontal: 4,
-    paddingVertical: 14,
-    borderRadius: 14,
     alignItems: "center",
-    backgroundColor: "#FFFFFF",
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    borderRadius: 14,
+    backgroundColor: couleurs.surface,
     borderWidth: 1.5,
-    borderColor: "#E4E7EC",
+    borderColor: couleurs.bordure,
   },
-  boutonPresse: {
+  lignePressee: {
     opacity: 0.7,
   },
-  boutonDesactive: {
+  ligneDesactivee: {
     opacity: 0.5,
   },
+  cercleIcone: {
+    width: 38,
+    height: 38,
+    borderRadius: 19,
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 12,
+  },
   libelle: {
-    marginTop: 6,
-    fontSize: 10,
-    textAlign: "center",
-    color: "#6B7280",
+    fontSize: 14,
+    fontWeight: "500",
+    color: couleurs.texte,
+  },
+  coche: {
+    marginLeft: "auto",
   },
 });
