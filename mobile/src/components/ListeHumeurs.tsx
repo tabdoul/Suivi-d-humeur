@@ -2,13 +2,15 @@ import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { COULEURS_HUMEUR, ICONES_HUMEUR } from "../theme/styleHumeur";
+import { couleurs } from "../theme/couleurs";
 import { EntreeHumeur, LIBELLES_HUMEUR } from "../types/typeHumeur";
 import { formaterDate } from "../utils/formatDate";
 
 interface ListeHumeursProps {
   humeurs: EntreeHumeur[];
 }
-                // ListeHumeurs 
+
+            // ListeHumeurs
 export function ListeHumeurs({ humeurs }: ListeHumeursProps) {
   if (humeurs.length === 0) {
     return (
@@ -49,12 +51,12 @@ const styles = StyleSheet.create({
   ligne: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: couleurs.surface,
     borderRadius: 10,
     padding: 12,
     marginBottom: 8,
     borderWidth: 1,
-    borderColor: "#E4E7EC",
+    borderColor: couleurs.bordure,
   },
   cercleIcone: {
     width: 40,
@@ -70,11 +72,11 @@ const styles = StyleSheet.create({
   libelle: {
     fontSize: 15,
     fontWeight: "600",
-    color: "#1C1F26",
+    color: couleurs.texte,
   },
   date: {
     fontSize: 12,
-    color: "#6B7280",
+    color: couleurs.texteAttenue,
     marginTop: 2,
   },
   vide: {
@@ -82,6 +84,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   texteVide: {
-    color: "#6B7280",
+    color: couleurs.texteAttenue,
   },
 });
