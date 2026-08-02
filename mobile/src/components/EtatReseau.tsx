@@ -10,7 +10,7 @@ interface EtatReseauProps {
   children: ReactNode; // le contenu a afficher si tout va bien (la liste des humeurs)
 }
 
-
+        // EtatReseau 
 export function EtatReseau({ statut, messageErreur, onReessayer, aDesDonnees, children }: EtatReseauProps) {
   if (statut === "chargement" && !aDesDonnees) {
     return (
