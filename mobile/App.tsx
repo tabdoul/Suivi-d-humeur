@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
-import { SelecteurHumeur } from "./src/components/SelecteurHumeur";
-import { NiveauHumeur } from "./src/types/typeHumeur";
+import React from "react";
+import { SafeAreaView, StatusBar, StyleSheet } from "react-native";
+import { ProviderHumeurs } from "./src/contexts/ContexteHumeurs";
+import { EcranHumeur } from "./src/screens/EcranHumeur";
 
 export default function App() {
-  const [valeur, setValeur] = useState<NiveauHumeur | null>(null);
-
   return (
-    <SafeAreaView style={styles.container}>
-      <SelecteurHumeur value={valeur} onChange={setValeur} />
+    <SafeAreaView style={styles.zoneSure}>
+      <StatusBar barStyle="dark-content" backgroundColor="#F7F8FA" />
+      <ProviderHumeurs>
+        <EcranHumeur />
+      </ProviderHumeurs>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  zoneSure: {
     flex: 1,
-    justifyContent: "center",
-    padding: 20,
+    backgroundColor: "#F7F8FA",
   },
 });
