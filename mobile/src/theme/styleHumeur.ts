@@ -1,4 +1,4 @@
-import { NiveauHumeur } from "../types/typeHumer";
+import { NiveauHumeur } from "../types/typeHumeur";
 
 // COULEURS_HUMEUR = la couleur associee a chaque niveau.
 
