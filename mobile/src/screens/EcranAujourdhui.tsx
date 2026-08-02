@@ -7,7 +7,7 @@ import { useSuiviHumeurContext } from "../contexts/ContexteHumeurs";
 import { couleurs } from "../theme/couleurs";
 import { NiveauHumeur } from "../types/typeHumeur";
 
-export function EcranHumeur() {
+export function EcranAujourdhui() {
   const { humeurs, statut, messageErreur, enEnvoi, rafraichir, ajouterHumeur } = useSuiviHumeurContext();
   const [valeurChoisie, setValeurChoisie] = useState<NiveauHumeur | null>(null);
   const [confirmation, setConfirmation] = useState<string | null>(null);

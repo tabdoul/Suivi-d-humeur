@@ -2,7 +2,7 @@ import axios from "axios";
 import { EntreeHumeur, NiveauHumeur } from "../types/typeHumeur";
 
 // Adresse du serveur backend
-const ADRESSE_SERVEUR = "http://localhost:4000";
+const ADRESSE_SERVEUR = "http://192.168.1.169:4000";
 
 const client = axios.create({
   baseURL: ADRESSE_SERVEUR,
