@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { ModalConfirmation } from "../components/ModalConfirmation";
 import { SelecteurHumeur } from "../components/SelecteurHumeur";
 import { SuggestionsRaison } from "../components/SuggestionsRaison";
 import { useSuiviHumeurContext } from "../contexts/ContexteHumeurs";
@@ -76,9 +77,13 @@ export function EcranAujourdhui() {
         >
           <Text style={styles.texteBoutonValider}>{enEnvoi ? "Envoi..." : "Valider"}</Text>
         </Pressable>
-
-        {confirmation && <Text style={styles.texteConfirmation}>{confirmation}</Text>}
       </ScrollView>
+
+      <ModalConfirmation
+        visible={confirmation !== null}
+        message={confirmation ?? ""}
+        onFermer={() => setConfirmation(null)}
+      />
     </KeyboardAvoidingView>
   );
 }
@@ -146,10 +151,5 @@ const styles = StyleSheet.create({
     color: couleurs.texteSurPrincipal,
     fontWeight: "700",
     fontSize: 14,
-  },
-  texteConfirmation: {
-    textAlign: "center",
-    color: couleurs.succes,
-    marginTop: 10,
   },
 });
