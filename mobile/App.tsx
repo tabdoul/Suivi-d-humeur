@@ -1,26 +1,17 @@
 import React from "react";
 import { StatusBar, StyleSheet } from "react-native";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ProviderHumeurs } from "./src/contexts/ContexteHumeurs";
-import { EcranAujourdhui } from "./src/screens/EcranAujourdhui";
+import { Navigation } from "./src/navigation/Navigation";
 import { couleurs } from "./src/theme/couleurs";
 
 export default function App() {
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={styles.zoneSure}>
-        <StatusBar barStyle="dark-content" backgroundColor={couleurs.fond} />
-        <ProviderHumeurs>
-          <EcranAujourdhui />
-        </ProviderHumeurs>
-      </SafeAreaView>
+      <StatusBar barStyle="dark-content" backgroundColor={couleurs.fond} />
+      <ProviderHumeurs>
+        <Navigation />
+      </ProviderHumeurs>
     </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  zoneSure: {
-    flex: 1,
-    backgroundColor: couleurs.fond,
-  },
-});
