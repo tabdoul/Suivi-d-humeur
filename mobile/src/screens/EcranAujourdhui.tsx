@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { EtatReseau } from "../components/EtatReseau";
-import { ListeHumeurs } from "../components/ListeHumeurs";
 import { SelecteurHumeur } from "../components/SelecteurHumeur";
 import { useSuiviHumeurContext } from "../contexts/ContexteHumeurs";
 import { couleurs } from "../theme/couleurs";
 import { NiveauHumeur } from "../types/typeHumeur";
 
 export function EcranAujourdhui() {
-  const { humeurs, statut, messageErreur, enEnvoi, rafraichir, ajouterHumeur } = useSuiviHumeurContext();
+  const { enEnvoi, ajouterHumeur } = useSuiviHumeurContext();
   const [valeurChoisie, setValeurChoisie] = useState<NiveauHumeur | null>(null);
   const [confirmation, setConfirmation] = useState<string | null>(null);
 
@@ -41,16 +39,6 @@ export function EcranAujourdhui() {
       </Pressable>
 
       {confirmation && <Text style={styles.texteConfirmation}>{confirmation}</Text>}
-
-      <Text style={styles.titreHistorique}>Historique</Text>
-      <EtatReseau
-        statut={statut}
-        messageErreur={messageErreur}
-        onReessayer={rafraichir}
-        aDesDonnees={humeurs.length > 0}
-      >
-        <ListeHumeurs humeurs={humeurs} />
-      </EtatReseau>
     </View>
   );
 }
@@ -94,13 +82,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: couleurs.succes,
     marginTop: 10,
-  },
-  titreHistorique: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: couleurs.texte,
-    paddingHorizontal: 20,
-    marginTop: 24,
-    marginBottom: 8,
   },
 });
