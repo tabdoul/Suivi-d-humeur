@@ -1,4 +1,5 @@
-
+    // API REST simulée pour l'exercice ULTEAM - suivi d'humeur 
+ 
 const express = require("express");
 const cors = require("cors");
 
@@ -10,11 +11,12 @@ application.use(express.json());
 // côté mobile (sinon la réponse est instantanée en local).
 const DELAI_RESEAU_MS = 800;
 
-/** @type {{ id: string, humeur: number, date: string, creeLe: string }[]} */
+/** @type {{ id: string, humeur: number, raison?: string, date: string, creeLe: string }[]} */
 let humeurs = [
   {
     id: "seed-1",
     humeur: 4,
+    raison: "Bonne reunion d'equipe ce matin",
     date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10),
     creeLe: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
   },
@@ -44,16 +46,22 @@ application.get(
 application.post(
   "/api/humeurs",
   avecDelaiReseau((requete, reponse) => {
-    const { humeur } = requete.body;
+    const { humeur, raison } = requete.body;
 
     if (typeof humeur !== "number" || humeur < 1 || humeur > 5) {
       return reponse.status(400).json({ message: "'humeur' doit être un nombre entre 1 et 5" });
+    }
+
+    // "raison" est facultatif, mais si elle est fournie, elle doit etre du texte.
+    if (raison !== undefined && typeof raison !== "string") {
+      return reponse.status(400).json({ message: "'raison' doit être du texte" });
     }
 
     const maintenant = new Date();
     const nouvelleEntree = {
       id: String(Date.now()),
       humeur,
+      raison: raison && raison.trim() !== "" ? raison.trim() : undefined,
       date: maintenant.toISOString().slice(0, 10),
       creeLe: maintenant.toISOString(),
     };
