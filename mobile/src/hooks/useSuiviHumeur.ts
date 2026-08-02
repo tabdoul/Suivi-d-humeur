@@ -9,7 +9,7 @@ interface ResultatHook {
   messageErreur: string | null;
   enEnvoi: boolean;
   rafraichir: () => void;
-  ajouterHumeur: (humeur: NiveauHumeur) => Promise<boolean>;
+  ajouterHumeur: (humeur: NiveauHumeur, raison?: string) => Promise<boolean>;
 }
 
 
@@ -38,19 +38,19 @@ export function useSuiviHumeur(): ResultatHook {
     charger();
   }, [charger]);
 
-  const ajouterHumeur = useCallback(async (humeur: NiveauHumeur): Promise<boolean> => {
-    setEnEnvoi(true);
-    try {
-      const nouvelleEntree = await envoyerHumeur(humeur);
-      setHumeurs((precedentes) => [nouvelleEntree, ...precedentes]);
-      return true;
-    } catch (erreur) {
-      setMessageErreur(erreur instanceof Error ? erreur.message : "Une erreur est survenue.");
-      return false;
-    } finally {
-      setEnEnvoi(false);
-    }
-  }, []);
+const ajouterHumeur = useCallback(async (humeur: NiveauHumeur, raison?: string): Promise<boolean> => {
+  setEnEnvoi(true);
+  try {
+    const nouvelleEntree = await envoyerHumeur(humeur, raison);
+    setHumeurs((precedentes) => [nouvelleEntree, ...precedentes]);
+    return true;
+  } catch (erreur) {
+    setMessageErreur(erreur instanceof Error ? erreur.message : "Une erreur est survenue.");
+    return false;
+  } finally {
+    setEnEnvoi(false);
+  }
+}, []);
 
   return { humeurs, statut, messageErreur, enEnvoi, rafraichir: charger, ajouterHumeur };
 }
