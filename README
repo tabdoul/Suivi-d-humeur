@@ -1,0 +1,188 @@
+#  Partie C
+
+
+                        Nom et Prenom : Diallo Thierno abdoul
+
+
+# Contexte
+
+L'objectif est de développer une application mobile permettant à un utilisateur de :
+
+- choisir son humeur du jour parmi cinq niveaux ;
+- enregistrer cette humeur avec la date du jour ;
+- récupérer l'historique depuis une API REST ;
+- gérer proprement les états de chargement, succès et erreur.
+
+
+# Les petits plus
+
+En complément du socle demandé, j'ai souhaité proposer une expérience plus proche d'une véritable application de bien-être, tout en gardant un code simple, lisible et facilement maintenable.
+
+J'ai notamment ajouté :
+
+- navigation par onglets ;
+- écran de détail d'une humeur ;
+- champ "raison" facultatif avec suggestions rapides ;
+- citation du jour ;
+- splash screen ;
+- modal de confirmation après validation ;
+- quelques améliorations UX (états vides, messages utilisateur, transitions).
+
+
+# Architecture du projet
+
+
+SuiviDhumeur/
+Backend : API REST simulée (Node.js + Express)
+mobile  : Application React Native (Expo + TypeScript)
+
+
+# Installation
+
+## 1. Backend
+
+---bash
+cd Backend
+npm install
+npm start
+
+
+API disponible sur :
+```
+http://localhost:4000/api/humeurs
+```
+
+
+Le serveur simule volontairement un léger délai réseau afin de rendre les états de chargement visibles. Il est également possible de tester facilement le cas d'erreur : GET/api/humeurs?echec=1
+
+
+
+## 2. Application mobile
+
+---bash
+cd mobile
+npm install
+
+Configurer ensuite l'URL du backend dans : src/services/apiHumeurs.ts
+
+
+Selon l'environnement :
+
+Web / Simulateur iOS : `http://localhost:4000`
+Émulateur Android : `http://10.0.2.2:4000` 
+Téléphone physique : `http://Votre_IP:4000` 
+
+Puis lancer Expo :
+
+------bash
+
+npx expo start
+
+
+---
+
+# Fonctionnalités
+
+## Socle demandé
+
+- Sélection d'une humeur parmi 5 niveaux
+- Enregistrement de l'humeur avec la date
+- Historique récupéré via une API REST
+- Gestion complète des états :
+  - chargement
+  - succès
+  - erreur
+- Code TypeScript
+- Hooks React
+- Git avec commits progressifs
+
+
+## Fonctionnalités supplémentaires
+
+- Navigation par onglets avec React Navigation
+- Historique détaillé dans une fenêtre modale
+- Champ "raison" facultatif
+- Suggestions adaptées à l'humeur choisie
+- Citation quotidienne
+- Splash Screen
+- Modal de confirmation
+- Interface pensée pour être simple et agréable
+
+
+# Choix techniques
+
+## TypeScript
+
+Tous les modèles métier sont typés afin de sécuriser les échanges de données et de limiter les erreurs à la compilation.
+
+
+## Séparation des responsabilités
+
+Les types, les composants, les services, les hooks et le thème sont séparés afin de faciliter la maintenance et l'évolution du projet.
+
+
+## Context API
+
+J'ai choisi **Context API** plutôt que Redux Toolkit.
+
+Pour une application de cette taille, Redux aurait ajouté plus de complexité  (store, reducers, actions) alors que Context répond parfaitement au besoin de partage d'état entre les écrans.
+
+
+## Gestion réseau
+
+Les appels API sont systématiquement protégés par des blocs `try/catch`.
+
+Les trois états sont gérés explicitement :
+
+- chargement (`ActivityIndicator`)
+- succès
+- erreur avec bouton :Réessayer
+
+Le backend simule volontairement un délai afin de pouvoir observer ces états.
+
+
+## FlatList
+
+L'historique utilise `FlatList`, plus adaptée qu'un `ScrollView` avec `map()` dès que la liste grandit.
+
+
+## Qualité du code
+
+- composants réutilisables
+- hooks dédiés
+- fonctions utilitaires isolées
+- commits Git progressifs
+- code commenté.
+
+
+# Tests
+
+Le projet contient un test unitaire sur une fonction utilitaire (`formaterDate`).
+
+Une pipeline **GitHub Actions** exécute automatiquement :
+
+- les tests
+- le typecheck  
+
+à chaque `push`.
+
+
+
+# Amélioration possible
+
+Bien que le projet réponde aux objectifs de l'exercice, plusieurs améliorations pourraient être apportées dans un contexte de développement plus complet :
+
+- AsyncStorage afin de consulter l'historique hors ligne ;
+- davantage de tests (hooks et appels API) ;
+- une configuration automatique de l'URL du backend selon l'environnement ;
+- une authentification complète adaptée à des données sensibles.
+
+
+# Historique Git
+
+Le projet a été développé de manière incrémentale avec des commits réguliers et ciblés.
+
+Chaque commit correspond à une étape fonctionnelle (types, composants, hooks, navigation, services, interface, backend, documentation...) afin de faciliter la relecture du projet.
+
+
+Merci pour votre lecture !
