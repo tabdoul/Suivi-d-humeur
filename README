@@ -170,7 +170,7 @@ Une pipeline **GitHub Actions** exécute automatiquement :
 
 # Amélioration possible
 
-Bien que le projet réponde aux objectifs de l'exercice, plusieurs améliorations pourraient être apportées dans un contexte de développement plus complet :
+voici quelques améliorations que j'envisagerais pour faire évoluer l'application :
 
 - AsyncStorage afin de consulter l'historique hors ligne ;
 - davantage de tests (hooks et appels API) ;
