@@ -16,7 +16,7 @@ L'objectif est de développer une application mobile permettant à un utilisateu
 
 # Les petits plus
 
-En complément du socle demandé, j'ai souhaité proposer une expérience plus proche d'une véritable application de bien-être, tout en gardant un code simple, lisible et facilement maintenable.
+En plus des fonctionnalités demandées, j'ai souhaité apporter quelques améliorations afin de proposer une expérience utilisateur plus aboutie, tout en conservant une architecture simple, un code lisible et facilement maintenable.
 
 J'ai notamment ajouté :
 
@@ -68,7 +68,7 @@ Configurer ensuite l'URL du backend dans : src/services/apiHumeurs.ts
 
 Selon l'environnement :
 
-Web / Simulateur iOS : `http://localhost:4000`
+Web Simulateur iOS : `http://localhost:4000`
 Émulateur Android : `http://10.0.2.2:4000` 
 Téléphone physique : `http://Votre_IP:4000` 
 
@@ -83,7 +83,7 @@ npx expo start
 
 # Fonctionnalités
 
-## Socle demandé
+## fonctionnalités demandées
 
 - Sélection d'une humeur parmi 5 niveaux
 - Enregistrement de l'humeur avec la date
@@ -130,7 +130,7 @@ Pour une application de cette taille, Redux aurait ajouté plus de complexité  
 
 ## Gestion réseau
 
-Les appels API sont systématiquement protégés par des blocs `try/catch`.
+Les appels API sont centralisés dans un service dédié et systématiquement protégés par des blocs `try/catch`.
 
 Les trois états sont gérés explicitement :
 
@@ -148,8 +148,10 @@ L'historique utilise `FlatList`, plus adaptée qu'un `ScrollView` avec `map()` d
 
 ## Qualité du code
 
+Une attention particulière a été portée à la qualité et à la maintenabilité du code :
+
 - composants réutilisables
-- hooks dédiés
+- hooks personnalisés lorque cela apporte de la clarté
 - fonctions utilitaires isolées
 - commits Git progressifs
 - code commenté.
@@ -164,9 +166,11 @@ Une pipeline **GitHub Actions** exécute automatiquement :
 - les tests
 - le typecheck  
 
-à chaque `push`.
+à chaque `push` afin de vérifier que le projet reste dans un état fonctionnel.
 
+# Pourquoi ces choix
 
+L'objectif n'était pas de réaliser l'application la plus complexe possible, mais de proposer une base saine et évolutive, en privilégiant la lisibilité du code, une bonne séparation des responsabilités et une expérience utilisateur soignée. J'ai volontairement favorisé des solutions  simples et adaptée à la taille du projet plutôt que d'ajouter des outils ou des architectures qui n'auraient pas apporté de valeur dans ce contexte.
 
 # Amélioration possible
 
@@ -180,9 +184,10 @@ voici quelques améliorations que j'envisagerais pour faire évoluer l'applicati
 
 # Historique Git
 
-Le projet a été développé de manière incrémentale avec des commits réguliers et ciblés.
+Le projet a été développé de manière incrémentale avec des commits réguliers, ciblés et explicites.
 
 Chaque commit correspond à une étape fonctionnelle (types, composants, hooks, navigation, services, interface, backend, documentation...) afin de faciliter la relecture du projet.
+
 
 
 Merci pour votre lecture !
